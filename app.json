@@ -1,0 +1,20 @@
+{
+  "name": "vue-service",
+  "scripts": {
+  },
+  "env": {
+    "NODE_ENV": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
