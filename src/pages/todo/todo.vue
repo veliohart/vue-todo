@@ -26,6 +26,7 @@
           this.all = Object.assign({}, snapshot.val())
           this.done = selectTodos(snapshot.val(), true)
           this.active = selectTodos(snapshot.val(), false)
+          console.log('this.done', this.done)
         })
     },
     methods: {
@@ -97,7 +98,7 @@
           </md-tab>
 
           <md-tab md-icon="notifications_active">
-            <md-list v-for="(val, date, index) in all" :key="date">
+            <md-list v-for="(val, date, index) in active" :key="date">
               <md-subheader>{{date}}</md-subheader>
               <md-list-item v-for="(todo, key) in val" v-bind:key="key">
                 <md-icon>bookmark</md-icon>

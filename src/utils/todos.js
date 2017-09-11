@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 export const selectTodos = (todos, state = null) => {
   return _.mapValues(todos, todo => {
-    return _.mapValues(todo, value => {
+    return _.filter(todo, value => {
       if (state === null) {
         return value
       }
