@@ -11,6 +11,15 @@
         initialValue: ''
       }
     },
+    beforeMount: function () {
+      const email = 'test@mail.com'
+      const password = 'testpassword'
+      this.$fireApp.auth().signInWithEmailAndPassword(email, password).catch(error => {
+        // Handle Errors here.
+        this.errorCode = error.code
+        this.errorMessage = error.message
+      })
+    },
     mounted: function () {
       this.$fireDB.ref('todos')
         .on('value', (snapshot) => {
