@@ -1,13 +1,13 @@
 <script>
+  import {selectTodos} from '@/utils/todos'
+
   export default {
     name: 'layout',
-    data: () => {
+    data: function () {
       return {
         all: {},
-        done: () => {
-
-        },
-        active: () => {},
+        done: {},
+        active: {},
         initialValue: ''
       }
     },
@@ -16,15 +16,16 @@
       const password = 'testpassword'
       this.$fireApp.auth().signInWithEmailAndPassword(email, password).catch(error => {
         // Handle Errors here.
-        this.errorCode = error.code
-        this.errorMessage = error.message
+        console.log(error)
       })
     },
     mounted: function () {
       this.$fireDB.ref('todos')
         .on('value', (snapshot) => {
           console.log('snapshot.val()', snapshot.val())
-          this.all = snapshot.val()
+          this.all = Object.assign({}, snapshot.val())
+          this.done = selectTodos(snapshot.val(), true)
+          this.active = selectTodos(snapshot.val(), false)
         })
     },
     methods: {
@@ -79,7 +80,10 @@
               <md-list-item v-for="(todo, key) in val" v-bind:key="key">
                 <md-icon v-if="todo.done">done_all</md-icon>                
                 <md-icon v-else>bookmark</md-icon>
-                <span>
+                <span v-if="todo.done" class="done">
+                  {{todo.text}}
+                </span>
+                <span v-else>
                   {{todo.text}}
                 </span>
                 <span>
@@ -93,11 +97,39 @@
           </md-tab>
 
           <md-tab md-icon="notifications_active">
+            <md-list v-for="(val, date, index) in all" :key="date">
+              <md-subheader>{{date}}</md-subheader>
+              <md-list-item v-for="(todo, key) in val" v-bind:key="key">
+                <md-icon>bookmark</md-icon>
+                <span>
+                  {{todo.text}}
+                </span>
+                <span>
+                  <md-button class="md-icon-button md-mini" v-bind:disabled="todo.done" v-on:click="setDone(key, todo, date)">
+                    <md-icon>done</md-icon>
+                  </md-button>
+                </span>
+              </md-list-item>
+              <md-divider class="md-inset"></md-divider>
+            </md-list>
           </md-tab>
 
           <md-tab md-icon="done">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
+            <md-list v-for="(val, date, index) in done" :key="date">
+              <md-subheader>{{date}}</md-subheader>
+              <md-list-item v-for="(todo, key) in val" v-bind:key="key">
+                <md-icon>done_all</md-icon>                
+                <span class="done">
+                  {{todo.text}} 
+                </span>
+                <span>
+                  <md-button class="md-icon-button md-mini" v-bind:disabled="todo.done" v-on:click="setDone(key, todo, date)">
+                    <md-icon>done</md-icon>
+                  </md-button>
+                </span>
+              </md-list-item>
+              <md-divider class="md-inset"></md-divider>
+            </md-list>
           </md-tab>
         </md-tabs>
       </md-whiteframe>
@@ -111,5 +143,8 @@
   }
   .add-form {
     padding: 5px 25px;
+  }
+  .done {
+    text-decoration: line-through;
   }
 </style>
