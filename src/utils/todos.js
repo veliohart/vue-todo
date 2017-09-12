@@ -17,5 +17,5 @@ export const selectTodos = (todos, state = null) => {
     }
   }).sort((a, b) => {
     return new Date(a.date) < new Date(b.date) ? 1 : 0
-  })
+  }).filter(item => item.todos.length > 0)
 }

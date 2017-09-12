@@ -98,9 +98,9 @@
           </md-tab>
 
           <md-tab md-icon="notifications_active">
-            <md-list v-for="(val, date, index) in active" :key="date">
-              <md-subheader>{{date}}</md-subheader>
-              <md-list-item v-for="(todo, key) in val" v-bind:key="key">
+            <md-list v-for="(val, index) in active" :key="index">
+              <md-subheader>{{val.date}}</md-subheader>
+              <md-list-item v-for="(todo, key) in val.todos" v-bind:key="todo.key">
                 <md-icon>bookmark</md-icon>
                 <span>
                   {{todo.text}}
@@ -116,15 +116,15 @@
           </md-tab>
 
           <md-tab md-icon="done">
-            <md-list v-for="(val, date, index) in done" :key="date">
-              <md-subheader>{{date}}</md-subheader>
-              <md-list-item v-for="(todo, key) in val" v-bind:key="key">
+            <md-list v-for="(val, index) in done" :key="index">
+              <md-subheader>{{val.date}}</md-subheader>
+              <md-list-item v-for="(todo, key) in val.todos" v-bind:key="key">
                 <md-icon>done_all</md-icon>                
                 <span class="done">
                   {{todo.text}} 
                 </span>
                 <span>
-                  <md-button class="md-icon-button md-mini" v-bind:disabled="todo.done" v-on:click="setDone(key, todo, date)">
+                  <md-button class="md-icon-button md-mini" v-bind:disabled="todo.done" v-on:click="setDone(todo, val.date)">
                     <md-icon>done</md-icon>
                   </md-button>
                 </span>
