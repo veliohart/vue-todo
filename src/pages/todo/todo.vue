@@ -14,19 +14,18 @@
     beforeMount: function () {
       const email = 'test@mail.com'
       const password = 'testpassword'
-      this.$fireApp.auth().signInWithEmailAndPassword(email, password).catch(error => {
-        // Handle Errors here.
-        console.log(error)
-      })
+      this.$fireApp.auth()
+        .signInWithEmailAndPassword(email, password)
+        .catch(error => {
+          console.log(error)
+        })
     },
     mounted: function () {
       this.$fireDB.ref('todos')
         .on('value', (snapshot) => {
-          console.log('snapshot.val()', snapshot.val())
           this.all = selectTodos(snapshot.val())
           this.done = selectTodos(snapshot.val(), true)
           this.active = selectTodos(snapshot.val(), false)
-          console.log('this.done', this.done)
         })
     },
     methods: {
@@ -88,7 +87,10 @@
                   {{todo.text}}
                 </span>
                 <span>
-                  <md-button class="md-icon-button md-mini" v-bind:disabled="todo.done" v-on:click="setDone(todo, val.date)">
+                  <md-button 
+                    class="md-icon-button md-mini" 
+                    v-bind:disabled="todo.done" 
+                    v-on:click="setDone(todo, val.date)">
                     <md-icon>done</md-icon>
                   </md-button>
                 </span>
@@ -106,7 +108,10 @@
                   {{todo.text}}
                 </span>
                 <span>
-                  <md-button class="md-icon-button md-mini" v-bind:disabled="todo.done" v-on:click="setDone(todo, val.date)">
+                  <md-button 
+                    class="md-icon-button md-mini" 
+                    v-bind:disabled="todo.done" 
+                    v-on:click="setDone(todo, val.date)">
                     <md-icon>done</md-icon>
                   </md-button>
                 </span>
@@ -124,7 +129,10 @@
                   {{todo.text}} 
                 </span>
                 <span>
-                  <md-button class="md-icon-button md-mini" v-bind:disabled="todo.done" v-on:click="setDone(todo, val.date)">
+                  <md-button 
+                    class="md-icon-button md-mini" 
+                    v-bind:disabled="todo.done" 
+                    v-on:click="setDone(todo, val.date)">
                     <md-icon>done</md-icon>
                   </md-button>
                 </span>
