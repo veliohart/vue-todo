@@ -53,16 +53,11 @@
 </script>
 
 <template>
-  <md-layout md-gutter="16" class="content-container" tag="section">
-    <md-layout 
-      md-flex-small="10" 
-      md-flex="25" 
-      md-column 
-      md-flex-xsmall="100"></md-layout>
+  <md-layout md-align="center" class="content-container" tag="section">
     <md-layout 
       md-flex-small="80" 
       md-flex="50" 
-      md-column 
+      md-column
       md-flex-xsmall="100">
       <md-whiteframe>
         <div class="add-form">
