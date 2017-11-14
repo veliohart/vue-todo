@@ -73,7 +73,7 @@
             <md-list v-for="(val, index) in all" :key="index">
               <md-subheader>{{val.date}}</md-subheader>
               <md-list-item v-for="(todo, index) in val.todos" v-bind:key="index">
-                <md-icon v-if="todo.done">done_all</md-icon>                
+                <md-icon v-if="todo.done">&#xE877;</md-icon>                
                 <md-icon v-else>bookmark</md-icon>
                 <span v-if="todo.done" class="done">
                   {{todo.text}}
