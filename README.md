@@ -1,6 +1,6 @@
 # vue-service
 
-> A Vue.js project 
+> A Vue.js project  for testing
 
 ## Build Setup 
 
