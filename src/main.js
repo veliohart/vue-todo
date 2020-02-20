@@ -7,7 +7,7 @@ import router from './router'
 import {beforeCreate, created} from './app-hooks'
 import {fire} from './plugins/firebase'
 
-import 'vue-material/dist/vue-material.css'
+import 'vue-material/dist/vue-material.css' 
 
 Vue.config.productionTip = false
 Vue.use(VueMaterial)
